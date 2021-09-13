@@ -23,20 +23,39 @@ for rw=1:height(gf_coreg_info)
     slant_path=fullfile(datadir,project,subject,session,char(gf_coreg_info.slant(rw)),'SEG','T1_seg.nii')
     cat12_path=fullfile(datadir,project,subject,session,char(gf_coreg_info.cat12(rw)),'BIAS_CORR','mt1.nii')
     
+        
     % gunzip files if needed
+    ferror=false;
     if(~isfile(gf_fmriqa_path))
-        gunzip([gf_fmriqa_path '.gz'])
+        if(isfile([gf_fmriqa_path '.gz']))
+            gunzip([gf_fmriqa_path '.gz'])
+        else
+            disp(['Unable to find file ' gf_fmriqa_path '.gz'])
+            ferror=true;
+        end
     end
     if(~isfile(slant_path))
-        gunzip([slant_path '.gz'])
+        if(isfile([slant_path '.gz']))
+            gunzip([slant_path '.gz'])
+        else
+            disp(['Unable to find file ' slant_path '.gz'])
+            ferror=true;
+        end
     end
     if(~isfile(cat12_path))
-        gunzip([cat12_path '.gz'])
+        if(isfile([cat12_path '.gz']))
+            gunzip([cat12_path '.gz'])
+        else
+            disp(['Unable to find file ' cat12_path '.gz'])
+            ferror=true;
+        end
     end
         
     % use Baxter's fmriqa coregistration to coreg T1 and segmentation to
     %   mean fmri
-    coregister(out_dir, cat12_path, slant_path, gf_fmriqa_path)
+    if(~ferror) % no missing files
+        coregister(out_dir, cat12_path, slant_path, gf_fmriqa_path)
+    end
     
 end
 

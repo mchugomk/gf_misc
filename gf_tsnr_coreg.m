@@ -19,34 +19,34 @@ for rw=1:height(gf_coreg_info)
     
     % filepaths
     out_dir=fullfile(datadir,project,subject,session,char(gf_coreg_info.gf_fmriqa(rw)),'MEANFMRI')
-    gf_fmriqa_path=fullfile(datadir,project,subject,session,char(gf_coreg_info.gf_fmriqa(rw)),'MEANFMRI','meanfmri.nii') 
-    slant_path=fullfile(datadir,project,subject,session,char(gf_coreg_info.slant(rw)),'SEG','T1_seg.nii')
-    cat12_path=fullfile(datadir,project,subject,session,char(gf_coreg_info.cat12(rw)),'BIAS_CORR','mt1.nii')
+    gf_fmriqa_file=fullfile(datadir,project,subject,session,char(gf_coreg_info.gf_fmriqa(rw)),'MEANFMRI','meanfmri.nii') 
+    slant_file=fullfile(datadir,project,subject,session,char(gf_coreg_info.slant(rw)),'SEG','T1_seg.nii')
+    cat12_file=fullfile(datadir,project,subject,session,char(gf_coreg_info.cat12(rw)),'BIAS_CORR','mt1.nii')
     
         
     % gunzip files if needed
     ferror=false;
-    if(~isfile(gf_fmriqa_path))
-        if(isfile([gf_fmriqa_path '.gz']))
-            gunzip([gf_fmriqa_path '.gz'])
+    if(~isfile(gf_fmriqa_file))
+        if(isfile([gf_fmriqa_file '.gz']))
+            gunzip([gf_fmriqa_file '.gz'])
         else
-            disp(['Unable to find file ' gf_fmriqa_path '.gz'])
+            disp(['Unable to find file ' gf_fmriqa_file '.gz'])
             ferror=true;
         end
     end
-    if(~isfile(slant_path))
-        if(isfile([slant_path '.gz']))
-            gunzip([slant_path '.gz'])
+    if(~isfile(slant_file))
+        if(isfile([slant_file '.gz']))
+            gunzip([slant_file '.gz'])
         else
-            disp(['Unable to find file ' slant_path '.gz'])
+            disp(['Unable to find file ' slant_file '.gz'])
             ferror=true;
         end
     end
-    if(~isfile(cat12_path))
-        if(isfile([cat12_path '.gz']))
-            gunzip([cat12_path '.gz'])
+    if(~isfile(cat12_file))
+        if(isfile([cat12_file '.gz']))
+            gunzip([cat12_file '.gz'])
         else
-            disp(['Unable to find file ' cat12_path '.gz'])
+            disp(['Unable to find file ' cat12_file '.gz'])
             ferror=true;
         end
     end
@@ -54,7 +54,7 @@ for rw=1:height(gf_coreg_info)
     % use Baxter's fmriqa coregistration to coreg T1 and segmentation to
     %   mean fmri
     if(~ferror) % no missing files
-        coregister(out_dir, cat12_path, slant_path, gf_fmriqa_path)
+        coregister(out_dir, cat12_file, slant_file, gf_fmriqa_file)
     end
     
 end

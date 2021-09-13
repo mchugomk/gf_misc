@@ -1,5 +1,7 @@
 clear all; 
 
+% addpath '~/github/fmriqa/src'; % use baxpr's coregister() function
+
 datadir='/data/gf'
 
 % csv file containing list of files to be coregistered

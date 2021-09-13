@@ -24,7 +24,7 @@ for rw=1:1
     session=num2str(gf_coreg_info.session_label(rw));
     
     % filepaths
-    out_dir=fullfile(datadir,project,subject,session,char(gf_coreg_info.gf_fmriqa(rw)),'MEANFMRI')
+    out_dir=fullfile(datadir,project,subject,session,char(gf_coreg_info.gf_fmriqa(rw)),'TSNR_IMG')
     gf_spt_tsnr_file=fullfile(datadir,project,subject,session,char(gf_coreg_info.gf_fmriqa(rw)),'TSNR_IMG','temporal_snr.nii') 
     slant_seg_file=fullfile(datadir,project,subject,session,char(gf_coreg_info.slant(rw)),'SEG','rcT1_seg.nii') % coregistered to qa meanfmri
     slant_csv_file=fullfile(datadir,project,subject,session,char(gf_coreg_info.slant(rw)),'STATS','T1_label_volumes.txt') % coregistered to qa meanfmri
@@ -49,27 +49,8 @@ for rw=1:1
     end
     
     if(~ferror)
-
-        roidata=extract_roidata_slant(gf_spt_tsnr_file, slant_seg_file, slant_csv_file, out_dir, tag)
         
-%         % Get coregistered slant SEG volume
-%         Vseg = spm_vol(slant_seg_file);
-%         [Yseg,XYZ] = spm_read_vols(Vseg);
-%         Yseg=reshape(Yseg,1,[]);
-%         mask_hipp_r = Yseg == slant_hipp_r_label; % mask for right hippocampus
-%         mask_hipp_l = Yseg == slant_hipp_l_label; % mask for left hippocampus
-%             
-%         % Get tsnr volume
-%         Vtsnr = spm_vol(gf_spt_tsnr_file);
-%         [Ytsnr,XYZ] = spm_read_vols(Vtsnr);
-%         Ytsnr=reshape(Ytsnr,1,[]);
-%                 
-%         % tSNR from ROI masks
-%         tsnr_voxels_hipp_r=Ytsnr(mask_hipp_r);
-%         tsnr_voxels_hipp_l=Ytsnr(mask_hipp_l);
-%         tsnr_mean_hipp_r=mean(tsnr_voxels_hipp_r)
-%         tsnr_mean_hipp_l=mean(tsnr_voxels_hipp_l)
-
+        roidata=extract_roidata_slant(gf_spt_tsnr_file, slant_seg_file, slant_csv_file, out_dir, tag)
         
     end
     

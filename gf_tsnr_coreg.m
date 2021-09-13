@@ -54,7 +54,7 @@ for rw=1:height(gf_coreg_info)
     % use Baxter's fmriqa coregistration to coreg T1 and segmentation to
     %   mean fmri
     if(~ferror) % no missing files
-        coregister(out_dir, cat12_file, slant_file, gf_fmriqa_file)
+        coregister(out_dir, cat12_file, slant_file, gf_fmriqa_path)
     end
     
 end

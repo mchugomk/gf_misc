@@ -2,13 +2,13 @@ clear all;
 
 % addpath '~/github/fmriqa/src'; % use baxpr's coregister() function
 
-datadir='/data/gf'
+datadir='/data/gf/tSNR'
 
 % csv file containing list of files to be coregistered
 % format:
 % project_label,subject_label,session_label,gf_fmri,slant,cat12,gf_fmriqa
 % GenFac_HWZ,141375,141375,GenFac_HWZ-x-141375-x-141375-x-gf-fmri-SPT_v1-x-1c472f2f-a207-4d25-8b28-e30933f147b7,GenFac_HWZ-x-141375-x-141375-x-slant_gpu_v1-x-23cc921b-7d45-454a-9782-b99dcb1d6043,GenFac_HWZ-x-141375-x-141375-x-cat12_ss2p0_v2-x-9ef506a2-9c1f-4933-9479-aa47692455f8,GenFac_HWZ-x-141375-x-141375-x-fmriqa_v4-x-090cadfd-4361-4381-992d-fc462c2ecdb9
-gf_coreg_info_file='/data/gf/gf_spt_fmriqa_coreg_list.csv' 
+gf_coreg_info_file='/data/gf/tSNR/gf_spt_fmriqa_coreg_list.csv' 
 
 gf_coreg_info = readtable(gf_coreg_info_file,'Delimiter',{','}); % read csv into table
 
